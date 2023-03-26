@@ -1,23 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import UserInput from './components/UserInput/UserInput';
+import React,{useState} from 'react';
+import UserList from './components/UserOutput/UserList';
+import ErrorMoodle from './components/UserInput/ErrorMoodle';
 
 function App() {
+  // let users=[
+  //   {id:0,username:'Fred',age:'24'},
+  // ];
+  
+  const [validInput,setValidInput]=useState(true);
+  const [usersArr, setUsersArr]=useState([]);
+  const [errorMessage,setUserMessage]=useState('');
+
+  function errorMessageHandler(message){
+    setValidInput(false);
+    setUserMessage(message);
+  }
+
+  function updateUsersHandler(user){
+    setUsersArr(preUsers=>[...preUsers,user]);
+  }
+
+  function closeErrorMoodle(){
+    setValidInput(true);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserInput onAddUser={updateUsersHandler} onErrorHandler={errorMessageHandler}/>
+      {usersArr.length===0 ?'': <UserList data={usersArr}/>}
+      
+      {!validInput&&<ErrorMoodle onReadErrorHandler={closeErrorMoodle}>{errorMessage}</ErrorMoodle>}
+      
     </div>
   );
 }

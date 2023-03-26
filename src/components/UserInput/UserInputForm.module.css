@@ -1,0 +1,24 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+
+}
+
+.container label{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.container input{
+    height: 1.5rem;
+    width: 60rem;
+}
+
+.container button{
+    color: white;
+    padding: 5px;
+    font-size: 1.5rem;
+    background-color:rgb(131, 63, 196);
+}
